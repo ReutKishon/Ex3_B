@@ -87,12 +87,87 @@ solver::RealVariable operator*(const RealVariable &x, const RealVariable &y)
     return res;
 }
 
-
-solver::RealVariable operator/(const RealVariable &x, const RealVariable &y){
+solver::RealVariable operator/(const RealVariable &x, const RealVariable &y)
+{
     return x;
 }
 
+/// left side:
+solver::RealVariable operator+(const RealVariable &x, const double num)
+{
+    RealVariable res;
 
+    for (auto it = x.umap.begin(); it != x.umap.end(); it++)
+    {
+        if (it->second != 0) // if there is a real number
+        {
+            res.umap[it->first] += it->second; // add to res.umap[degree] value of x in the same degree
+        }
+    }
 
+    res.umap[0] += num;
+    return res;
+}
 
+solver::RealVariable operator-(const RealVariable &x, const double num)
+{
 
+    RealVariable res;
+
+    for (auto it = x.umap.begin(); it != x.umap.end(); it++)
+    {
+        if (it->second != 0) // if there is a real number
+        {
+            res.umap[it->first] += it->second; // add to res.umap[degree] value of x in the same degree
+        }
+    }
+
+    res.umap[0] -= num;
+    return res;
+}
+
+solver::RealVariable operator*(const RealVariable &x, const double num)
+{
+    RealVariable res;
+    for (auto it = x.umap.begin(); it != x.umap.end(); it++)
+    {
+        if (it->second != 0)
+        {
+            res.umap[it->first] = it->second * num;
+        }
+    }
+    return res;
+}
+
+solver::RealVariable operator/(const RealVariable &x, const double num)
+{
+    RealVariable res;
+    for (auto it = x.umap.begin(); it != x.umap.end(); it++)
+    {
+        if (it->second != 0)
+        {
+            res.umap[it->first] = it->second / num;
+        }
+    }
+    return res;
+}
+
+solver::RealVariable operator^(const RealVariable &x, const int num)
+{
+    RealVariable res;
+    switch (num)
+    {
+    case 0:
+        res.umap[0] += 1;
+        break;
+    case 1:
+        res = x;
+        break;
+    case 2:
+        res = x * x;
+        break;
+    default:
+        throw("illegal degree!");
+        break;
+    }
+}

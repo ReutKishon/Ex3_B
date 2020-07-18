@@ -11,8 +11,8 @@ namespace solver
         unordered_map<int, double> umap = {{0, 0},
                                            {1, 0},
                                            {2, 0}};
+
         //right
-        friend RealVariable operator+(const RealVariable &x, const RealVariable &y);
         friend RealVariable operator-(const double num, const RealVariable &x);
         friend RealVariable operator/(const double num, const RealVariable &x);
         friend RealVariable operator+(const double num, const RealVariable &x);
@@ -24,7 +24,7 @@ namespace solver
         friend RealVariable operator-(const RealVariable &x, const double num);
         friend RealVariable operator*(const RealVariable &x, const double num);
         friend RealVariable operator/(const RealVariable &x, const double num);
-        friend RealVariable operator^(const RealVariable &x, const double num);
+        friend RealVariable operator^(const RealVariable &x, const int num);
 
         //both
         friend RealVariable operator+(const RealVariable &x1, const RealVariable &x);
@@ -37,10 +37,8 @@ namespace solver
         friend RealVariable operator==(const RealVariable &x, const double num);
         friend RealVariable operator==(const RealVariable &x1, const RealVariable &x)
         {
-            return x1 - x;
         }
         friend RealVariable operator==(const RealVariable &x, const double num);
     };
 
 }; // namespace solver
-

@@ -38,7 +38,6 @@ namespace solver
         friend RealVariable operator==(const RealVariable &x1, const RealVariable &x)
         {
         }
-        friend RealVariable operator==(const RealVariable &x, const double num);
     };
 
 }; // namespace solver

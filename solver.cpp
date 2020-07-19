@@ -67,7 +67,6 @@ RealVariable solver::operator-(const RealVariable &x, const RealVariable &y)
 RealVariable solver::operator*(const RealVariable &x, const RealVariable &y)
 {
     RealVariable res;
-    res.umap[1] = 0;
     for (auto it = x.umap.begin(); it != x.umap.end(); it++)
     {
         for (auto it2 = y.umap.begin(); it2 != y.umap.end(); it2++)
@@ -97,6 +96,7 @@ RealVariable solver::operator*(const RealVariable &x, const RealVariable &y)
             }
         }
     }
+    res.umap[1] -= 1; // hack because res.umap is initialize with umap[1] =1
     return res;
 }
 
@@ -464,7 +464,6 @@ ComplexVariable solver::operator-(const ComplexVariable &x, const ComplexVariabl
 ComplexVariable solver::operator*(const ComplexVariable &x, const ComplexVariable &y)
 {
     ComplexVariable res;
-    res.umap[1] = 0;
     for (auto it = x.umap.begin(); it != x.umap.end(); it++)
     {
         for (auto it2 = y.umap.begin(); it2 != y.umap.end(); it2++)
@@ -494,6 +493,7 @@ ComplexVariable solver::operator*(const ComplexVariable &x, const ComplexVariabl
             }
         }
     }
+    res.umap[1] -= 1; // hack because umap is initialize with umap[1]=1;
     return res;
 }
 ComplexVariable solver::operator/(const ComplexVariable &x, const ComplexVariable &y)
@@ -569,8 +569,58 @@ ComplexVariable solver::operator==(const ComplexVariable &x, const ComplexVariab
     return res;
 }
 
-complex<double> linear_solve_complex(const ComplexVariable &e){
-    
+complex<double> linear_solve_complex(const ComplexVariable &e)
+{
+
+    complex<double> result;
+    complex<double> value_at_0 = e.umap.at(0);
+    complex<double> value_at_1 = e.umap.at(1);
+    result = -(value_at_0 / value_at_1);
+    return result;
+}
+
+complex<double> quadaric_solve_complex(const ComplexVariable &e)
+{
+    double a, b, c = 0;
+    float x1, x2, discriminant, realPart, imaginaryPart;
+    for (auto it = e.umap.begin(); it != e.umap.end(); it++)
+
+        switch (it->first)
+        {
+        case 0:
+
+            c = it->second.real();
+            cout << "c = " << c << endl;
+
+            break;
+        case 1:
+            b = it->second.real();
+            cout << "b = " << b << endl;
+
+            break;
+        case 2:
+            a = it->second.real();
+            cout << "a = " << a << endl;
+
+            break;
+        }
+
+    discriminant = b * b - 4 * a * c;
+    if (discriminant < 0)
+    {
+        realPart = -b / (2 * a);
+        imaginaryPart = sqrt(-discriminant) / (2 * a);
+    }
+    else if(discriminant>0)
+    {
+        realPart = (-b + sqrt(discriminant)) / (2 * a);
+        imaginaryPart = 0;
+    }
+
+    cout << "Roots are complex and different." << endl;
+    cout << "x1 = " << realPart << "+" << imaginaryPart << "i" << endl;
+    cout << "x2 = " << realPart << "-" << imaginaryPart << "i" << endl;
+    return complex<double>(realPart, imaginaryPart);
 }
 
 complex<double> solver::solve(const ComplexVariable &e)

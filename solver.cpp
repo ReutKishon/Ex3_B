@@ -3,9 +3,22 @@
 #include <iostream>
 #include <stdio.h>
 #include <unordered_map>
+#include <stdbool.h>
 using namespace solver;
 using namespace std;
 
+bool equation_is_valid(const RealVariable &e)
+{
+    auto value_at_0 = e.umap.at(0);
+    auto value_at_1 = e.umap.at(1);
+    auto value_at_2 = e.umap.at(2);
+    if (value_at_0 != 0 && value_at_1 == 0 && value_at_2 == 0)
+        return false;
+    if (value_at_0 == 0 && value_at_1 == 0 && value_at_2 == 0)
+        return false;
+
+    return true;
+}
 
 //both
 RealVariable solver::operator+(const RealVariable &x, const RealVariable &y)
@@ -94,7 +107,7 @@ RealVariable solver::operator/(const RealVariable &x, const RealVariable &y)
                 else
                 {
                     new_degree = it->first - 2;
-                    new_value = it->second / value_at_1;
+                    new_value = it->second / value_at_2;
                     res.umap[new_degree] = new_value;
                 }
                 break;
@@ -149,7 +162,10 @@ RealVariable solver::operator*(const RealVariable &x, double num)
 
 RealVariable solver::operator/(const RealVariable &x, double num)
 {
-    RealVariable res;
+
+    if (num == 0)
+        throw("Can't divide by zero!");
+    RealVariable res=x;
     for (auto it = x.umap.begin(); it != x.umap.end(); it++)
     {
         if (it->second != 0)
@@ -199,7 +215,7 @@ RealVariable solver::operator-(double num, const RealVariable &x)
 }
 RealVariable solver::operator*(double num, const RealVariable &x)
 {
-    RealVariable res;
+    RealVariable res=x;
     for (auto it = x.umap.begin(); it != x.umap.end(); it++)
     {
         if (it->second != 0)
@@ -216,13 +232,18 @@ RealVariable solver::operator==(double num, const RealVariable &x)
     RealVariable res;
     res = x;
     res.umap[0] -= num;
+    if (equation_is_valid(res) == false)
+        throw("illegal equation!");
     return res;
 }
 RealVariable solver::operator==(const RealVariable &x, double num)
 {
+
     RealVariable res;
     res = x;
     res.umap[0] -= num;
+    if (equation_is_valid(res) == false)
+        throw("illegal equation!");
     return res;
 }
 RealVariable solver::operator==(const RealVariable &x, const RealVariable &y)
@@ -231,6 +252,8 @@ RealVariable solver::operator==(const RealVariable &x, const RealVariable &y)
     RealVariable res;
 
     res = x - y;
+    if (equation_is_valid(res) == false)
+        throw("illegal equation!");
     return res;
 }
 
@@ -296,3 +319,7 @@ double solver::solve(const RealVariable &e)
     }
     return x1;
 }
+
+
+
+

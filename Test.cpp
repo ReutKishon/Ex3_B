@@ -11,8 +11,6 @@
 using namespace std;
 using namespace solver;
 
-
-
 TEST_CASE("basic checks 1:")
 {
     RealVariable x;
@@ -189,13 +187,11 @@ TEST_CASE("check throws:")
 
     CHECK_THROWS(solve(4.0 * y * 9.0 + (y ^ 3) + 8 == 9));
 
-    // CHECK_THROWS(solve(y / 0 + 8.0 == 0));
+    CHECK_THROWS(solve(y / 0 + 8.0 == 0));
 
-    // CHECK_THROWS(solve(12 / 0 * y == y * 4));
+    CHECK_THROWS(solve((y ^ 2) / 0 == 2.0 * (y ^ 4)));
 
-    // CHECK_THROWS(solve((y ^ 2) / 0 == 2.0 * (y ^ 4)));
-
-    // CHECK_THROWS(solve(4 * y / 0 + 12 == 0));
+    CHECK_THROWS(solve(4 * y / 0 + 12 == 0));
 
     CHECK_THROWS(solve(4 * y - 4 * y + 12 == 0));
 
@@ -203,7 +199,7 @@ TEST_CASE("check throws:")
 
     CHECK_THROWS(solve(4 * y * 9 + (y ^ 3) + 12 == 9));
 
-    // CHECK_THROWS(solve(4 * y + y / 0 + 12.0 == 0));
+    CHECK_THROWS(solve(4 * y + y / 0 + 12.0 == 0));
 
     CHECK_THROWS(solve(4 * y + 12 == y * 4));
 
@@ -213,7 +209,7 @@ TEST_CASE("check throws:")
 
     CHECK_THROWS(solve(4 * (y ^ 4) * 7 + 12 == 28 * (y ^ 2)));
 
-    // CHECK_THROWS(solve(4 * y - 3 * y / 0 == 0)); //84
+    CHECK_THROWS(solve(4 * y - 3 * y / 0 == 0)); //84
 }
 
 TEST_CASE("more test:")
@@ -241,9 +237,9 @@ TEST_CASE("more test:")
 
     CHECK(solve(5 * x == -5) == -1);
 
-    // CHECK(solve(x - 4 == 10) == 14);
+    CHECK(solve(x - 4 == 10) == 14);
 
-    // CHECK(solve(5 * x - 10 == 10) == 4);
+    CHECK(solve(5 * x - 10 == 10) == 4);
 }
 
 TEST_CASE("RealVariable - polynomial equations")
@@ -269,15 +265,13 @@ TEST_CASE("RealVariable - polynomial equations")
 
     CHECK_THROWS(solve((x ^ 2) - (x ^ 2) == 0) == 0);
 
-    // (solve(2 * (x ^ 2) - (x ^ 2) - 1 == 0) == 1); //21
+    (solve(2 * (x ^ 2) - (x ^ 2) - 1 == 0) == 1); //21
 }
 
 TEST_CASE("RealVariable - throw cases")
 {
 
     RealVariable x;
-
-    //CHECK_THROWS(solve(2 == 1));
 
     CHECK_THROWS(solve((x ^ 2) == -1));
 
@@ -286,8 +280,4 @@ TEST_CASE("RealVariable - throw cases")
     CHECK_THROWS(solve((x * 2 - 10) / x == 10));
 
     CHECK_THROWS(solve(2 * x / x == 3));
-
-    //CHECK_THROWS(solve(2-4+4 == 10) );
-
-    // CHECK_THROWS(solve((2^2) == 10) );
 }

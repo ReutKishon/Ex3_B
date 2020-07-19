@@ -39,5 +39,10 @@ int main()
     // cout << solve((y ^ 2) + 2 * y + 4 == 20 + 6 * y / 2 - y) << endl; // 4+0i or -4+0i
     // cout << solve(y + 5i == 2 * y + 3i) << endl;                      // 0+2i
 
+    cout << complex<double>(1, 1) + complex<double>(1, 2) << endl;
+    cout << complex<double>(1, 1) - complex<double>(1, 2) << endl;
+    cout << complex<double>(1, 1) * complex<double>(1, 2) << endl;
+    cout << complex<double>(1, 1) / complex<double>(1, 2) << endl;
+
     return 0;
 }

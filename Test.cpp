@@ -90,7 +90,7 @@ TEST_CASE("5:")
 //     CHECK(solve(-6.0 - 6i == 2 * y) == std::complex<double>(-3, -3));
 //     CHECK(solve(-6.0 + 2i == 6i + 2.0 * y) == std::complex<double>(-3, -2));
 //     CHECK(solve(-2 * y - 6.0 + 2i == 6i) == std::complex<double>(-3, -2));
-//     CHECK(solve(-6.0 + 2i - 6i == 2 * y) == std::complex<double>(-3, -2));
+    // CHECK(solve(-6.0 + 2i - 6i == 2 * y) == std::complex<double>(-3, -2));
 //     CHECK(solve(3 + y == 6i) == std::complex<double>(-3, 6));
 //     CHECK(solve(3 == 6i - y) == std::complex<double>(-3, 6));
 // }
@@ -155,7 +155,7 @@ TEST_CASE("8:")
 //     CHECK(solve((y1 ^ 2) == 16) == std::complex<double>(4, 0));
 //     // CHECK(solve((y1 ^ 2) == 16) == std::complex<double>(-4, 0));
 //     CHECK(solve((y1 ^ 2) == 16) == std::complex<double>(4, 0));
-//     // CHECK(solve((y1 ^ 2) == 16) == std::complex<double>(-4, 0));
+//     // CHECK(solve((y1 ^ 2) == -16) == std::complex<double>(-4, 0));
 //     CHECK(solve(-6.0 - 6i == 2 * y1) == std::complex<double>(-3, -3));
 //     CHECK(solve(-6.0 + 2i == 6i + 2 * y1) == std::complex<double>(-3, -2));
 //     CHECK(solve(-2 * y1 - 6.0 + 2i == 6i) == std::complex<double>(-3, -2));

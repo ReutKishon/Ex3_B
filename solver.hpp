@@ -15,35 +15,34 @@ namespace solver
 
         {
             umap = {{0, 0},
-                    {1, 0},
+                    {1, 1},
                     {2, 0}};
         }
-
-        //right
-        // friend ostream &operator<<(ostream &out, const RealVariable &var);
-
-        friend RealVariable operator-(double num, const RealVariable &x);
-        friend RealVariable operator+(double num, const RealVariable &x);
-        friend RealVariable operator*(double num, const RealVariable &x);
-
-        //left
-        friend RealVariable operator+(const RealVariable &x, double num);
-        friend RealVariable operator-(const RealVariable &x, double num);
-        friend RealVariable operator*(const RealVariable &x, double num);
-        friend RealVariable operator/(const RealVariable &x, double num);
-        friend RealVariable operator^(const RealVariable &x, const double num);
-
-        //both
-        friend RealVariable operator+(const RealVariable &x1, const RealVariable &x);
-        friend RealVariable operator-(const RealVariable &x1, const RealVariable &x);
-        friend RealVariable operator*(const RealVariable &x, const RealVariable &y);
-        friend RealVariable operator/(const RealVariable &x1, const RealVariable &x);
-        // friend RealVariable operator^(const RealVariable &x1, const RealVariable &x);
-        //relevant for solve function
-        friend RealVariable operator==(double num, const RealVariable &x);
-        friend RealVariable operator==(const RealVariable &x, double num);
-        friend RealVariable operator==(const RealVariable &x1, const RealVariable &x);
     };
+
+    //right
+    // friend ostream &operator<<(ostream &out, const RealVariable &var);
+
+    RealVariable operator-(double num, const RealVariable &x);
+    RealVariable operator+(double num, const RealVariable &x);
+    RealVariable operator*(double num, const RealVariable &x);
+    //left
+    RealVariable operator+(const RealVariable &x, double num);
+    RealVariable operator-(const RealVariable &x, double num);
+    RealVariable operator*(const RealVariable &x, double num);
+    RealVariable operator/(const RealVariable &x, double num);
+    RealVariable operator^(const RealVariable &x, const double num);
+
+    //both
+    RealVariable operator+(const RealVariable &x1, const RealVariable &x);
+    RealVariable operator-(const RealVariable &x1, const RealVariable &x);
+    RealVariable operator*(const RealVariable &x, const RealVariable &y);
+    RealVariable operator/(const RealVariable &x1, const RealVariable &x);
+    // friend RealVariable operator^(const RealVariable &x1, const RealVariable &x);
+    //relevant for solve function
+    RealVariable operator==(double num, const RealVariable &x);
+    RealVariable operator==(const RealVariable &x, double num);
+    RealVariable operator==(const RealVariable &x1, const RealVariable &x);
     double solve(const RealVariable &e);
 
 }; // namespace solver

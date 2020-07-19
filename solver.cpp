@@ -1,6 +1,7 @@
 #include "solver.hpp"
 #include <math.h>
 #include <iostream>
+#include <stdio.h>
 #include <unordered_map>
 using namespace solver;
 using namespace std;
@@ -70,7 +71,7 @@ RealVariable solver::operator-(const RealVariable &x, const RealVariable &y)
     return res;
 }
 
-RealVariable solver::operator*(const RealVariable &x, const RealVariable &y)
+RealVariable operator*(const RealVariable &x, const RealVariable &y)
 {
     RealVariable res;
     for (auto it = x.umap.begin(); it != x.umap.end(); it++)
@@ -136,7 +137,7 @@ RealVariable solver::operator-(const RealVariable &x, double num)
     {
         if (it->second != 0) // if there is a real number
         {
-            res.umap[it->first] += it->second; // add to res.umap[degree] value of x in the same degree
+            res.umap[it->first] = it->second; // add to res.umap[degree] value of x in the same degree
         }
     }
 
@@ -219,6 +220,7 @@ RealVariable solver::operator^(const RealVariable &x, const double num)
         throw("illegal degree!");
         break;
     }
+    return res;
 }
 
 // right side:
@@ -261,7 +263,7 @@ RealVariable solver::operator*(double num, const RealVariable &x)
     {
         if (it->second != 0)
         {
-            res.umap[it->first] += it->second * num;
+            res.umap[it->first] = (it->second * num);
         }
     }
     return res;

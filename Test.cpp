@@ -1,4 +1,4 @@
-#define DOCTEST_CONFIG_IMPLEME.NT_WITH_MAIN
+// #define DOCTEST_CONFIG_IMPLEME.NT_WITH_MAIN
 #include "doctest.h"
 #include "solver.hpp"
 #include <complex>

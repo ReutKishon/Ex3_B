@@ -20,14 +20,14 @@ int main()
 
     cout << solve(2.0 * x - 4.0 == 10.0) << endl; // 7
     cout << solve((x ^ 2.0) == 16.0) << endl;   // 4 or -4
-    try
-    {
-        cout << solve((x ^ 2.0) == -16.0) << endl;
-    }
-    catch (const exception &ex)
-    {
-        cout << ex.what() << endl; // prints "There is no real solution"
-    }
+    // try
+    // {
+    //     cout << solve((x ^ 2.0) == -16.0) << endl;
+    // }
+    // catch (const exception &ex)
+    // {
+    //     cout << ex.what() << endl; // prints "There is no real solution"
+    // }
     cout << solve((x ^ 2.0) + 2.0 * x + 4.0 == 20.0 + 6.0 * x / 2.0 - x) << endl; // 4 or -4
     double xvalue = solve(2.0 * x - 4.0 == 10.0);                           // xvalue == 7
 

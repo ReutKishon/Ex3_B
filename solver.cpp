@@ -40,7 +40,6 @@ RealVariable solver::operator+(const RealVariable &x, const RealVariable &y)
 
     for (auto it2 = y.umap.begin(); it2 != y.umap.end(); it2++)
     {
-        // cout << it2->first << "  " << it2->second << endl;
         if (it2->second != 0) // if there is a real number
         {
             res.umap[it2->first] += it2->second; // add to res.umap[degree] value of x in the same degree
